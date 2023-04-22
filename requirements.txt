@@ -1,0 +1,7 @@
+joblib~=1.1.1
+scikit-learn~=0.22
+tensorflow~=2.8.0
+numpy~=1.22.4
+scipy~=1.9.2
+six~=1.16.0
+aif360~=0.5.0
