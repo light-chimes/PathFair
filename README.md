@@ -1,7 +1,7 @@
-# PathFair
+# Analysing Data Distribution to Improve White-Box Fairness Testing
 
 > This is the code implementation of
-> paper [PathFair: Improve White-Box Fairness Testing With Activation Path Guidance]()
+> paper [Analysing Data Distribution to Improve White-Box Fairness Testing]()
 
 > The implementation of [NeuronFair](https://dl.acm.org/doi/abs/10.1145/3510003.3510123) is modified based on
 > the [code](https://github.com/haibinzheng/NeuronFair) provided by the authors.
@@ -13,19 +13,9 @@
 
 ***
 
-As a rapidly evolving AI technology, deep neural networks are becoming more and more integrated with human society.
-However, as the process progressed, concerns about fairness problems which might hide in neural networks were raised.
-Previous studies have proposed a metric called counterfactual fairness to measure the fairness of machine learning
-models, and proposed some methods to generate individual discrimination instance pairs (IDIPs) to improve the fairness
-of the model by retraining the model after correcting the discovered IDIPs. However, existing methods generally do not
-consider the selection of appropriate input samples, which may result in the performance of the method not being
-sufficiently developed. In this paper, we propose an activation path-guided sample ranking and selection method with an
-adjustable sampling rate parameter, followed by experiments on NeuronFair with several common datasets and sensitive
-attributes for two possible parameter values. The results show that, on average, PathFair can improve the performance of
-NeuronFair. Although we only conduct experiments on NeuronFair, since this method is a pre-processing method for sorting
-input samples, this method should be also applicable to other IDIP generation methods.
+As a rapidly evolving AI technology, deep neural networks are becoming more and more integrated with human society. However, as the process progressed, concerns about fairness problems that might hide in neural networks were raised. Previous studies have proposed a metric called counterfactual fairness to measure the fairness of machine learning models and proposed some methods to generate individual discrimination instance pairs (IDIPs). By retraining models with corrected IDIPs, the models' fairness is successfully improved. However, the number of samples that can be input into the methods for IDIP generation is often limited due to time, computing power, and other resource constraints. Because different samples can generate different numbers of IDIPs, it makes sense to select appropriate samples as input, which has usually not been taken into account in past studies. In this paper, we first analyze and confirm the existence and severity of the imbalanced distribution of IDIP in the dataset to show the necessity of selecting and ranking the input samples. Then, we propose an activation path guided sample ranking and selection method with an adjustable sampling rate parameter. We explored the relationship between the effectiveness of the method and the degree of imbalanced in IDIP distribution, followed by experiments on the current best IDIP generation method, NeuronFair, with several common datasets and sensitive attributes for two possible parameter values. The results show that, on average, PathFair can improve the performance of NeuronFair.
 
-![](regnet.png)
+In this repository, most of the files have the same structure as NeuronFair, the src holds some of our modified code, and the models we trained ourselves are stored in the models.
 
 ## Quick Start
 
@@ -59,6 +49,13 @@ cause some error.
 ```shell
 # param config_path: the path of configuration file
 python path_fair.py --config_path ../configs/census_race_actpath_front.cfg
+```
+
+improved_path_fair.py is the efficiency-improved version, which you can simply run like this:
+
+```shell
+# param config_path: the path of configuration file
+python improved_path_fair.py --config_path ../configs/census_race_actpath_front.cfg
 ```
 
 ### Custom Configuration
